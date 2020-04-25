@@ -1,12 +1,26 @@
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TodosController } from './todos/todos.controller';
 import { AuthModule } from './auth/auth.module';
+import { Todo } from './models/todo.model';
+import { User } from './models/user.model';
+import { ToDosController } from './todos/todos.controller';
+import { ToDosService } from './todos/to-dos.service';
 
 @Module({
-  imports: [AuthModule],
-  controllers: [AppController, TodosController],
-  providers: [AppService],
+  imports: [
+    AuthModule,
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      host: 'localhost',
+      port: 27017,
+      database: 'TodoDB',
+      entities: [__dirname + '/**/*.model{.ts,.js}'],
+      synchronize: true,
+    }),
+    TypeOrmModule.forFeature([Todo]),
+    TypeOrmModule.forFeature([User]),
+  ],
+  controllers: [ToDosController],
+  providers: [ToDosService],
 })
 export class AppModule {}

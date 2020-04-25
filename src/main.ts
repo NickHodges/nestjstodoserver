@@ -7,7 +7,11 @@ async function bootstrap() {
     key: fs.readFileSync('./Nicklocalhost.key'),
     cert: fs.readFileSync('./Nicklocalhost.crt'),
   };
-  const app = await NestFactory.create(AppModule, { httpsOptions });
-  await app.listen(3000);
+  const TodoServer = await NestFactory.create(AppModule, { httpsOptions });
+  TodoServer.enableCors({
+    credentials: true,
+    origin: true,
+  });
+  await TodoServer.listen(3000);
 }
 bootstrap();

@@ -1,0 +1,7 @@
+node_modules
+Nicklocalhost.crt
+Nicklocalhost.key
+*.js
+*.map
+**\dist
+.prettierrc

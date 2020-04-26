@@ -1,11 +1,10 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { Todo } from './models/todo.model';
 import { User } from './models/user.model';
 import { ToDosController } from './todos/todos.controller';
 import { ToDosService } from './todos/to-dos.service';
-import { AuthenticationMiddleware } from './middleware/authentication.middlesware';
-import { AuthzModule } from './authz/authz.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,15 +18,9 @@ import { AuthzModule } from './authz/authz.module';
     }),
     TypeOrmModule.forFeature([Todo]),
     TypeOrmModule.forFeature([User]),
-    AuthzModule,
+    AuthModule,
   ],
   controllers: [ToDosController],
   providers: [ToDosService],
 })
-export class AppModule {
-  public configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthenticationMiddleware)
-      .forRoutes({ path: '/todos', method: RequestMethod.ALL });
-  }
-}
+export class AppModule {}

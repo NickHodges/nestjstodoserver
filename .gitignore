@@ -5,3 +5,4 @@ Nicklocalhost.key
 *.map
 **\dist
 .prettierrc
+src/.env

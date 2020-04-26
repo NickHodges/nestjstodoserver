@@ -10,13 +10,16 @@ import {
   Query,
   ParseBoolPipe,
   UsePipes,
+  UseGuards,
 } from '@nestjs/common';
 import { ToDosService } from './to-dos.service';
 import { classToPlain } from 'class-transformer';
 import { Todo } from '../models/todo.model';
 import { ObjectID } from 'typeorm';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('todos')
+@UseGuards(AuthGuard('jwt'))  
 export class ToDosController {
   constructor(private todosService: ToDosService) {}
 
@@ -45,8 +48,8 @@ export class ToDosController {
     return this.todosService.getTodo(id);
   }
 
-  @Post()
   @UsePipes(new ValidationPipe())
+  @Post()
   async createTodo(@Body() todo: Todo) {
     return this.todosService.createTodo(todo);
   }

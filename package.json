@@ -24,6 +24,7 @@
     "auth0": "^2.24.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
+    "express-jwt": "^5.3.3",
     "fs": "0.0.1-security",
     "jwks-rsa": "^1.8.0",
     "mongodb": "^3.5.6",

@@ -16,13 +16,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       }),
 
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // 1
-      audience: process.env.AUTH0_AUDIENCE,
+      audience: 'http://localhost:3000',
       issuer: `https://${process.env.AUTH0_DOMAIN}/`,
     });
   }
 
   validate(payload: any, done: VerifiedCallback) {
     if (!payload) {
+      console.log('DENIED!!!!!');
       done(new UnauthorizedException(), false); // 2
     }
 

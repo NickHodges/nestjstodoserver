@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as fs from 'fs';
-import { AuthGuard } from '@nestjs/passport';
+//import passport from 'passport';
 
 async function bootstrap() {
   const httpsOptions = {
@@ -13,7 +13,9 @@ async function bootstrap() {
     credentials: true,
     origin: true,
   });
-  TodoServer.useGlobalGuards(new (AuthGuard('jwt'))());
+  // TodoServer.use(passport.initialize());
+  // TodoServer.use(passport.session());
   await TodoServer.listen(3000);
+  console.log(`Application is running on: ${await TodoServer.getUrl()}`);
 }
 bootstrap();

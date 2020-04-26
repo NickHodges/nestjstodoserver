@@ -1,4 +1,3 @@
-import { ValidationPipe } from './../utils/validation.pipe';
 import {
   Controller,
   Get,
@@ -9,7 +8,6 @@ import {
   Delete,
   Query,
   ParseBoolPipe,
-  UsePipes,
   UseGuards,
 } from '@nestjs/common';
 import { ToDosService } from './to-dos.service';
@@ -19,7 +17,7 @@ import { ObjectID } from 'typeorm';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('todos')
-@UseGuards(AuthGuard('jwt'))  
+//
 export class ToDosController {
   constructor(private todosService: ToDosService) {}
 
@@ -30,6 +28,7 @@ export class ToDosController {
     return todos;
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get('complete')
   async getTodos(@Query('iscomplete', new ParseBoolPipe()) isComplete) {
     let todosEntities: Todo[];
@@ -48,7 +47,6 @@ export class ToDosController {
     return this.todosService.getTodo(id);
   }
 
-  @UsePipes(new ValidationPipe())
   @Post()
   async createTodo(@Body() todo: Todo) {
     return this.todosService.createTodo(todo);

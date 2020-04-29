@@ -8,13 +8,11 @@ import {
   Delete,
   Query,
   ParseBoolPipe,
-  UseGuards,
 } from '@nestjs/common';
 import { ToDosService } from './to-dos.service';
 import { classToPlain } from 'class-transformer';
 import { Todo } from '../models/todo.model';
 import { ObjectID } from 'typeorm';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('todos')
 //
@@ -28,7 +26,6 @@ export class ToDosController {
     return todos;
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get('complete')
   async getTodos(@Query('iscomplete', new ParseBoolPipe()) isComplete) {
     let todosEntities: Todo[];

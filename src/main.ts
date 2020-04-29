@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as fs from 'fs';
 //import passport from 'passport';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const httpsOptions = {
@@ -13,8 +14,12 @@ async function bootstrap() {
     credentials: true,
     origin: true,
   });
-  // TodoServer.use(passport.initialize());
-  // TodoServer.use(passport.session());
+  TodoServer.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: true,
+    }),
+  );
+  
   await TodoServer.listen(3000);
   console.log(`Application is running on: ${await TodoServer.getUrl()}`);
 }

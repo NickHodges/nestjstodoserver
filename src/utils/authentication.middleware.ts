@@ -12,7 +12,6 @@ export class AuthenticationMiddleware implements NestMiddleware {
         jwksUri: 'https://a4rb.auth0.com/.well-known/jwks.json',
       }),
 
-      // audience: 'NickWasHere',
       issuer: 'https://a4rb.auth0.com/',
       algorithm: 'RS256',
     })(req, res, err => {

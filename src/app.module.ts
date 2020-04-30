@@ -13,17 +13,11 @@ import { ToDosService } from './todos/to-dos.service';
       port: 27017,
       database: 'TodoDB',
       entities: [__dirname + '/**/*.model{.ts,.js}'],
-      synchronize: true,
+      synchronize: true
     }),
-    TypeOrmModule.forFeature([Todo]),
+    TypeOrmModule.forFeature([Todo])
   ],
   controllers: [ToDosController],
-  providers: [ToDosService],
+  providers: [ToDosService]
 })
-export class AppModule {
-  public configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthenticationMiddleware)
-      .forRoutes({ path: '/todos', method: RequestMethod.ALL });
-  }
-}
+export class AppModule {}

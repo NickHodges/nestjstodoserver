@@ -1,4 +1,3 @@
-import { AuthenticationMiddleware } from './utils/authentication.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { Todo } from './models/todo.model';

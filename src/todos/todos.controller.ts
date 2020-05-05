@@ -8,7 +8,7 @@ import {
   Delete,
   Query,
   ParseBoolPipe,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { ToDosService } from './to-dos.service';
 import { classToPlain } from 'class-transformer';
@@ -30,6 +30,7 @@ export class ToDosController {
   }
 
   @Get('complete')
+  @UseGuards(AuthGuard('jwt'))
   async getTodos(@Query('iscomplete', new ParseBoolPipe()) isComplete) {
     let todosEntities: Todo[];
 
@@ -43,21 +44,25 @@ export class ToDosController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   async getTodo(@Param('id') id: ObjectID): Promise<Todo> {
     return this.todosService.getTodo(id);
   }
 
   @Post()
+  @UseGuards(AuthGuard('jwt'))
   async createTodo(@Body() todo: Todo) {
     return this.todosService.createTodo(todo);
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard('jwt'))
   async updTodo(@Param('id') id: ObjectID, @Body() todo: Todo) {
     return this.todosService.updateTodo(id, todo);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
   async deleteTodo(@Param('id') id: ObjectID) {
     return this.todosService.deleteTodo(id);
   }

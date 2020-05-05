@@ -8,11 +8,13 @@ import {
   Delete,
   Query,
   ParseBoolPipe,
+  UseGuards
 } from '@nestjs/common';
 import { ToDosService } from './to-dos.service';
 import { classToPlain } from 'class-transformer';
 import { Todo } from '../models/todo.model';
 import { ObjectID } from 'typeorm';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('todos')
 //
@@ -20,6 +22,7 @@ export class ToDosController {
   constructor(private todosService: ToDosService) {}
 
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   async getAllTodos() {
     const todosEntities = await this.todosService.getAllTodos();
     const todos = classToPlain(todosEntities);

@@ -3,6 +3,7 @@ import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { Todo } from './models/todo.model';
 import { ToDosController } from './todos/todos.controller';
 import { ToDosService } from './todos/to-dos.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { ToDosService } from './todos/to-dos.service';
       entities: [__dirname + '/**/*.model{.ts,.js}'],
       synchronize: true
     }),
-    TypeOrmModule.forFeature([Todo])
+    TypeOrmModule.forFeature([Todo]),
+    AuthModule
   ],
   controllers: [ToDosController],
   providers: [ToDosService]

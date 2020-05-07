@@ -19,8 +19,8 @@ async function bootstrap() {
       disableErrorMessages: true,
     }),
   );
-  
-  await TodoServer.listen(3000);
+
+  await TodoServer.listen(process.env.PORT);
   console.log(`Application is running on: ${await TodoServer.getUrl()}`);
 }
 bootstrap();

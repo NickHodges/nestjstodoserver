@@ -17,7 +17,6 @@ import { ObjectID } from 'typeorm';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('todos')
-//
 export class ToDosController {
   constructor(private todosService: ToDosService) {}
 

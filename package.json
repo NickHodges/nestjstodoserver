@@ -25,6 +25,7 @@
     "auth0": "^2.25.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
+    "dotenv": "^8.2.0",
     "express-jwt": "^5.3.3",
     "fs": "0.0.1-security",
     "jwks-rsa": "^1.8.0",
